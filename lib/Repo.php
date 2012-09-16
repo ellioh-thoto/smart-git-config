@@ -23,10 +23,10 @@ class Repo
      *
      * @param $the_RepoData
      */
-    function __construct($the_RepoData)
+    function __construct($the_RepoData = null)
     {
         if (!empty($the_RepoData))
-            $this->setUsersAndRights($the_RepoData);
+            $this->setPropreties($the_RepoData);
         else {
             $this->sz_Rights = "";
             $this->a_Users = null;
@@ -39,7 +39,7 @@ class Repo
      * @param $the_a_RepoData
      * @return bool
      */
-    public function setUsersAndRights($the_a_RepoData)
+    public function setPropreties($the_a_RepoData)
     {
         $a_Content = explode("\n", $the_a_RepoData);
         $this->sz_Name = trim($a_Content[0]);
@@ -52,7 +52,17 @@ class Repo
     }
 
     /**
+     * @return string
+     */
+    public function getFileData()
+    {
+        return "repo $this->sz_Name \n\t$this->sz_Rights     =   " . implode(" ", $this->a_Users) . "\n";
+    }
+
+    /**
      * handle echo on the object
+     *
+     * @return string
      */
     function __toString()
     {
@@ -76,6 +86,21 @@ class Repo
         return $this->sz_Name;
     }
 
+    /**
+     * @param string $sz_Rights
+     */
+    public function setRights($sz_Rights)
+    {
+        $this->sz_Rights = $sz_Rights;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRights()
+    {
+        return $this->sz_Rights;
+    }
 
     /* todo : get users info */
 }

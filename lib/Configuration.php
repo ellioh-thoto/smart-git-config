@@ -22,7 +22,7 @@ class Configuration
     }
 
     /**
-     * @param string $filePath
+     * @param $the_sz_FilePath
      */
     public function setFilePath($the_sz_FilePath)
     {
@@ -60,6 +60,33 @@ class Configuration
 
     }
 
+    /**
+     * if no filename passed in as parameter the preset filename is used
+     *
+     * @param string $the_sz_FilePath
+     * @throws Exception
+     */
+    public function writeFile($the_sz_FilePath = '')
+    {
+        $sz_WriteFilePath = $this->sz_FilePath;
+        if (!empty($the_sz_FilePath))
+            $sz_WriteFilePath = $the_sz_FilePath;
+
+        if (empty($sz_WriteFilePath))
+            throw new Exception ('No file specified for writing');
+
+        $sz_Data = "";
+        foreach ($this->a_Repos as $o_Repo) {
+            /** @var Repo $o_Repo */
+            $sz_Data .= $o_Repo->getFileData() . "\n";
+        }
+
+        file_put_contents($sz_WriteFilePath, $sz_Data);
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         $sz_Return = "";

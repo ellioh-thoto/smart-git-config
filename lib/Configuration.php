@@ -17,7 +17,7 @@ class Configuration
 
     function __construct()
     {
-        $this->sz_FilePath = './data/gitolite.conf';
+        $this->sz_FilePath = './data/confs/gitolite.conf';
         $this->setRepositoriesFromFile();
     }
 

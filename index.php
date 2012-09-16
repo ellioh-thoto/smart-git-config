@@ -12,5 +12,5 @@ $o_Configuration = new Configuration();
 
 echo $o_Configuration;
 
-$o_Configuration->writeFile("./data/out.config");
+$o_Configuration->writeFile("./data/confs/out.config");
 echo "Done!";

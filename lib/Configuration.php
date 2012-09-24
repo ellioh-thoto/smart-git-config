@@ -15,10 +15,13 @@ class Configuration
      */
     private $a_Repos;
 
+
     function __construct()
     {
-        $this->sz_FilePath = './data/confs/gitolite.conf';
-        $this->setRepositoriesFromFile();
+        $this->sz_FilePath = '../data/confs/gitolite.conf';
+        if (file_exists($this->sz_FilePath)) {
+            $this->setRepositoriesFromFile();
+        }
     }
 
     /**
@@ -50,8 +53,8 @@ class Configuration
         if (!empty($a_Reposdata)) {
             foreach ($a_Reposdata as $rd) {
                 if (empty($rd)) continue;
-                $this->a_Repos[] = new Repo($rd);
-
+                $tmp = new Repo($rd);
+                $this->a_Repos[$tmp->getName()] = $tmp;
             }
             return true;
         } else {
@@ -83,6 +86,23 @@ class Configuration
 
         file_put_contents($sz_WriteFilePath, $sz_Data);
     }
+
+    /**
+     * @param array $a_Repos
+     */
+    public function setRepos($a_Repos)
+    {
+        $this->a_Repos = $a_Repos;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRepos()
+    {
+        return $this->a_Repos;
+    }
+
 
     /**
      * @return string

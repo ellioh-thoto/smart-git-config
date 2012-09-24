@@ -9,11 +9,6 @@ class Repo
     private $sz_Name;
 
     /**
-     * @var array
-     */
-    private $a_Users;
-
-    /**
      * @var string
      */
     private $sz_Rights;
@@ -101,6 +96,28 @@ class Repo
     {
         return $this->sz_Rights;
     }
+
+    /**
+     * @var array
+     */
+    private $a_Users;
+
+    /**
+     * @param array $a_Users
+     */
+    public function setUsers($a_Users)
+    {
+        $this->a_Users = $a_Users;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        return $this->a_Users;
+    }
+
 
     /* todo : get users info */
 }

@@ -5,9 +5,9 @@
  * Time: 16:52
  */
 
-require_once('./lib/Configuration.php');
-require_once('./lib/Repo.php');
-
+session_start();
+require_once('../lib/Configuration.php');
+require_once('../lib/Repo.php');
 
 /*$o_Configuration = new Configuration();
 
@@ -15,5 +15,4 @@ echo $o_Configuration;
 
 $o_Configuration->writeFile("./data/confs/out.config");
 echo "Done!";*/
-
-header("Location: ./public/standard.php");
+include_once("../apps/RepositoriesView.php");

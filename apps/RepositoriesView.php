@@ -5,21 +5,21 @@
  * Time: 12:25
  */
 
-$a_Repos = $_SESSION['a_Repos'];
-$b_ReloadData = (isset($_REQUEST['b_ReloadData']) ? $_REQUEST['b_ReloadData'] : false);
+//$a_Repos = $_SESSION['a_Repos'];
+//$b_ReloadData = (isset($_REQUEST['b_ReloadData']) ? $_REQUEST['b_ReloadData'] : false);
 
-//if (!empty($a_Repos) && !$b_ReloadData){
+//if ($a_Repos !== null && !$b_ReloadData) {
 // echo ('$a_Repos : '); var_dump($a_Repos);
-$o_Configuration = new Configuration();
-$a_Repos = $o_Configuration->getRepos();
-$_SESSION['a_Repos'] = $a_Repos;
+    $o_Configuration = new Configuration();
+    $a_Repos = $o_Configuration->getRepos();
+   // $_SESSION['a_Repos'] = $a_Repos;
 //}
 
 if (isset($_REQUEST['sz_Repo'])) {
     $o_Repo = $a_Repos[$_REQUEST['sz_Repo']];
 
-    error_log('$_REQUEST[sz_Repo] : ' . $_REQUEST['sz_Repo']);
-    error_log('$o_Repo : ' . print_r($o_Repo, true));
+    error_log('sansie $_REQUEST[sz_Repo] : ' . $_REQUEST['sz_Repo']);
+    error_log('sansie $o_Repo : ' . print_r($o_Repo, true));
 }
 
 ?>
@@ -79,24 +79,26 @@ if (isset($_REQUEST['sz_Repo'])) {
 
             <form id="contact-form" method="post" action="scripts/contact-process.php">
                 <fieldset>
-                    <h2><?php echo ($o_Repo->getName() !== null ? $o_Repo->getName() : "Name") ?></h2>
-                    <label for="form_rights"><h3>Rights</h3></label>
-                    <input id="form_rights" type="text" name="rights"
-                           value="<?php echo ($o_Repo->getRights() !== null ? $o_Repo->getRights() : "Rights") ?>"
-                           onfocus="if(this.value=='Email'){this.value=''};"
-                           onblur="if(this.value==''){this.value='Email'};"/>
-                    <label for="form_users"><h3>Users</h3></label>
-                    <input id="form_users" type="text" name="users"
-                           value="<?php echo ($o_Repo->getUsers() !== null ? implode(', ', $o_Repo->getUsers()) : "Users") ?>"
-                           onfocus="if(this.value=='Subject'){this.value=''};"
-                           onblur="if(this.value==''){this.value='Subject'};"/>
+                    <?php if ($o_Repo) : ?>
+                        <h2><?php echo ($o_Repo->getName() !== null ? $o_Repo->getName() : "Name") ?></h2>
+                        <label for="form_rights"><h3>Rights</h3></label>
+                        <input id="form_rights" type="text" name="rights"
+                               value="<?php echo ($o_Repo->getRights() !== null ? $o_Repo->getRights() : "Rights") ?>"
+                               onfocus="if(this.value=='Email'){this.value=''};"
+                               onblur="if(this.value==''){this.value='Email'};"/>
+                        <label for="form_users"><h3>Users</h3></label>
+                        <input id="form_users" type="text" name="users"
+                               value="<?php echo ($o_Repo->getUsers() !== null ? implode(', ', $o_Repo->getUsers()) : "Users") ?>"
+                               onfocus="if(this.value=='Subject'){this.value=''};"
+                               onblur="if(this.value==''){this.value='Subject'};"/>
 
-                    <p><input id="form_submit" class="button" type="submit" name="submit" value="Submit"/></p>
+                        <p><input id="form_submit" class="button" type="submit" name="submit" value="Submit"/></p>
 
-                    <div class="hide">
-                        <label>Do not fill out this field</label>
-                        <input name="spam_check" type="text" value=""/>
-                    </div>
+                        <div class="hide">
+                            <label>Do not fill out this field</label>
+                            <input name="spam_check" type="text" value=""/>
+                        </div>
+                    <?php endif; ?>
                 </fieldset>
             </form>
         </div>
@@ -127,10 +129,7 @@ if (isset($_REQUEST['sz_Repo'])) {
     <div class="line"></div>
 
     <div id="footer">
-        <p class="copyright">Copyright © 2011 / [Your Name] / All Rights Reserved</p>
-
-        <p class="social"><a href="#">Follow Me On Twitter »</a></p>
-    </div>
+œ   </div>
     <!--end footer-->
 
 </div>

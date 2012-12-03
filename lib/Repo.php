@@ -14,6 +14,11 @@ class Repo
     private $sz_Rights;
 
     /**
+     * @var array
+     */
+    private $a_Users;
+
+    /**
      * Init properties
      *
      * @param $the_RepoData
@@ -39,7 +44,13 @@ class Repo
         $a_Content = explode("\n", $the_a_RepoData);
         $this->sz_Name = trim($a_Content[0]);
         $a_Temp = explode("=", trim($a_Content[1]));
-        $this->a_Users = explode(" ", trim($a_Temp[1]));
+        $a_UsersTmp = explode(" ", trim($a_Temp[1]));
+        $this->a_Users = array();
+        foreach ($a_UsersTmp as $sz_User) {
+            if (trim($sz_User) !== "")
+                $this->a_Users[] = $sz_User;
+        }
+
         $this->sz_Rights = $a_Temp[0];
         if (empty($this->a_Users) || empty($this->sz_Rights))
             return false;
@@ -97,10 +108,6 @@ class Repo
         return $this->sz_Rights;
     }
 
-    /**
-     * @var array
-     */
-    private $a_Users;
 
     /**
      * @param array $a_Users
